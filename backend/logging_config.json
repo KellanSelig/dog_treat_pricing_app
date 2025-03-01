@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "filters": {},
+  "formatters": {
+    "simple": {
+      "format": "%(levelname)s: %(message)s"
+    },
+    "detailed": {
+      "format": "[%(name)s | %(asctime)s | %(filename)s:%(lineno)s] %(levelname)s: %(message)s",
+      "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+    },
+    "json": {
+      "()": "backend.logging_config.JSONFormatter",
+      "fmt_keys": {
+        "level": "levelname",
+        "message": "message",
+        "timestamp": "timestamp",
+        "logger": "name",
+        "line": "lineno",
+        "file": "filename",
+        "thread_name": "threadName",
+        "pathname": "pathname",
+        "process": "process",
+        "process_name": "processName",
+        "module": "module",
+        "func_name": "funcName",
+        "taskName": "taskName"
+      }
+    }
+  },
+  "handlers": {
+    "stdout": {
+      "class": "logging.StreamHandler",
+      "formatter": "detailed",
+      "stream": "ext://sys.stdout",
+      "level": "INFO"
+    },
+    "file": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "json",
+      "level": "DEBUG",
+      "filename": "backend/logs/app.log",
+      "maxBytes": 10000000,
+      "backupCount": 3
+    },
+    "time_rotating": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "when": "H",
+      "interval": 1,
+      "backupCount": 48,
+      "filename": "backend/logs/app.log",
+      "formatter": "json",
+      "level": "DEBUG"
+    },
+    "queue_handler": {
+      "class": "logging.handlers.QueueHandler",
+      "handlers": ["stdout", "file"],
+      "respect_handler_level": true
+    }
+  },
+  "loggers": {
+    "root": {
+      "handlers": ["queue_handler"],
+      "level": "DEBUG"
+    }
+  }
+}

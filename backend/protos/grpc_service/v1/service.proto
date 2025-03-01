@@ -1,0 +1,102 @@
+syntax = "proto3";
+package backend.grpc_service.v1;
+
+import "google/protobuf/empty.proto";
+
+service DogTrickService {
+  rpc GetDogTreatPrice(GetDogTreatPriceRequest) returns (GetDogTreatPriceResponse);
+  rpc PerformDogTrick(PerformDogTrickRequest) returns (stream PerformDogTrickResponse);
+  rpc HeathCheck(google.protobuf.Empty) returns (HealthCheckResponse);
+}
+
+message GetDogTreatPriceRequest {
+  string dog_name = 1;
+  float dog_treat_to_belly_rub_ratio = 2;
+  repeated DogTrick tricks_to_perform = 3;
+  repeated DogBehavior cutes_to_include = 4;
+  string location = 5; // Should be an enum but keeping it simple
+}
+
+message GetDogTreatPriceResponse {
+  oneof result {
+    PricingResult pricing_result = 1;
+    string error = 2;
+  }
+  Status status = 3;
+}
+message PerformDogTrickRequest {
+  string dog_name = 1;
+  string pricing_id = 2;
+}
+message PerformDogTrickResponse {
+  oneof result {
+    CurrentTrick current_trick = 1;
+    string error_message = 2;
+  }
+  Status status = 3;
+  string dog_name = 4;
+  string pricing_id = 5;
+}
+
+message CurrentTrick {
+  DogTrick trick = 1;
+  Status status = 2;
+  string trick_description = 3;
+}
+
+message PricingResult {
+  string pricing_id = 1;
+  float dog_treat_price = 2;
+  float belly_rub_price = 3;
+  GetDogTreatPriceRequest request = 4;
+}
+
+message HealthCheckResponse {
+  string service_name = 1;
+  string version = 2;
+}
+
+enum DogTrick {
+  DOG_TRICK_UNSPECIFIED = 0;
+  DOG_TRICK_LAY_DOWN = 1;
+  DOG_TRICK_ROLL_OVER = 2;
+  DOG_TRICK_SIT = 3;
+  DOG_TRICK_SHAKE = 4;
+  DOG_TRICK_HIGH_FIVE = 5;
+  DOG_TRICK_GO_TO_BED = 6;
+  DOG_TRICK_STAY = 7;
+  DOG_TRICK_COME = 8;
+  DOG_TRICK_FETCH = 9;
+  DOG_TRICK_GO_TO_SPOT = 10;
+  DOG_TRICK_BUTTON = 11;
+  DOG_TRICK_LETS_GO = 12;
+  DOG_TRICK_THIS_WAY = 13;
+  DOG_TRICK_LEAVE_IT = 14;
+  DOG_TRICK_DROP_IT = 15;
+}
+
+enum DogBehavior {
+  DOG_BEHAVIOR_UNSPECIFIED = 0;
+  DOG_BEHAVIOR_WAGGING_TAIL = 1;
+  DOG_BEHAVIOR_PUPPY_EYES = 2;
+  DOG_BEHAVIOR_HEAD_TILT = 3;
+  DOG_BEHAVIOR_SNEEZE = 4;
+  DOG_BEHAVIOR_YAWN = 5;
+  DOG_BEHAVIOR_BARK = 6;
+  DOG_BEHAVIOR_PANT = 10;
+  DOG_BEHAVIOR_LICK = 11;
+  DOG_BEHAVIOR_JUMP = 12;
+  DOG_BEHAVIOR_SPIN = 13;
+  DOG_BEHAVIOR_SAD_PUPPY_EYES = 14;
+  DOG_BEHAVIOR_SLEEPY = 15;
+  DOG_BEHAVIOR_MAKE_BED = 16;
+  DOG_BEHAVIOR_CARRY_TOY = 17;
+  DOG_BEHAVIOR_CHOMP = 18;
+  DOG_BEHAVIOR_TUG_OF_WAR = 19;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_SUCCESS = 1;
+  STATUS_ERROR = 2;
+}

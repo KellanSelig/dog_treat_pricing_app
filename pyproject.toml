@@ -1,0 +1,126 @@
+[project]
+name = "doggy-treat-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.8",
+ "grpcio>=1.70.0",
+ "pydantic-settings>=2.8.1",
+]
+
+[dependency-groups]
+dev = [
+    "grpc-stubs>=1.53.0.5",
+    "grpcio-tools>=1.70.0",
+    "mypy>=1.15.0",
+    "mypy-protobuf>=3.6.0",
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.9.7",
+    "types-protobuf>=5.29.1.20250208",
+]
+
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "A",     # flake8-builtins
+    "ANN",   # flake8-annotations
+    "ARG",   # flake8-unused-arguments
+    "ASYNC", # flake8-async
+    "B",     # flake8-bugbear
+    "C4",    # flake8-comprehensions
+    "C90",
+    "COM",   # flake8-commas
+    # "D",     # pydocstyle
+    "DJ",    # flake8-django
+    "DTZ",   # flake8-datetimez
+    "E",
+    "EM",    # flake8-errmsg
+    "ERA",   # eradicate
+    "EXE",   # flake8-executable
+    "F",
+    "FA",    # flake8-future-annotations
+    "FAST",  # fastapi
+    "FBT",   # flake8-boolean-trap
+    "FLY",   # flynt
+    "G",     # flake8-logging-format
+    "I",     # isort
+    "ICN",   # flake8-import-conventions
+    "INT",   # flake8-gettext
+    "ISC",   # flake8-implicit-str-concat
+    "LOG",   # flake8-logging
+    "N",     # pep8-naming
+    "NPY",   # numpy
+    "PD",    # pandas-vet
+    "PERF",  # perflint
+    "PGH",   # pygrep-hooks
+    "PIE",   # flake8-pie
+    "PL",    # pylint
+    "PT",    # flake8-pytest-style
+    "PTH",   # flake8-use-pathlib
+    "PYI",   # flake8-pyi
+    "Q",     # flake8-quotes
+    "RET",   # flake8-return
+    "RSE",   # flake8-raise
+    "RUF",   # ruff
+    "S",     # flake8-bandit
+    "SIM",   # flake8-simplify
+    "SLF",   # flake8-self
+    "SLOT",  # flake8-slots
+    "T20",   # flake8-print
+    "TCH",   # flake8-type-checking
+    "TD",    # flake8-todos
+    "TID",   # flake8-tidy-imports
+    "TRIO",  # flake8-trio
+    "TRY",   # tryceratops
+    "UP",    # pyupgrade
+    "W",     # flake8
+    "YTT",   # flake8-2020
+]
+ignore = [
+    "ANN1",    # deprecated
+    "ANN401",  # allow `typing.Any`
+    "COM812",  # incompatible with formatter
+    "D203",    # incompatible with `D211`
+    "D212",    # incompatible with `D213`
+    "D100",    # allow ommit module docstring
+    "DTZ001",  # allow `datetime` calls without `tzinfo`
+    "ISC001",  # incompatible with formatter
+    "N802",    # allow PascalCase function names
+    "PLC0105", # don't require variance in type names
+    "PLC0414", # allow explicit reexports
+    "PLR0913", # allow many function arguments
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "TID252"]
+"tests/*.py" = ["S101", "ARG001"]
+
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.mypy]
+strict = true
+exclude = "*pb2*.py"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
