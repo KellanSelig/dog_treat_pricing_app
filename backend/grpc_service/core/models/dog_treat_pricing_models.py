@@ -41,15 +41,15 @@ class DogBehavior(StrEnum):
 
 
 class Location(StrEnum):
-    INSIDE_LOCATION = auto()
-    OUTSIDE_LOCATION = auto()
-    LOTS_OF_DOGS_LOCATION = auto()
-    DOG_PARK_LOCATION = auto()
-    SQUIRRELS_PRESENT_LOCATION = auto()
-    HOME_LOCATION = auto()
-    TASTY_TREATS_LOCATION = auto()
-    PET_STORE_LOCATION = auto()
-    UNKNOWN_LOCATION = auto()
+    INSIDE = auto()
+    OUTSIDE = auto()
+    LOTS_OF_DOGS = auto()
+    DOG_PARK = auto()
+    SQUIRRELS_PRESENT = auto()
+    HOME = auto()
+    TASTY_TREATS = auto()
+    PET_STORE = auto()
+    UNSPECIFIED = auto()
 
 
 @dataclass(slots=True, frozen=True)

@@ -1,3 +1,4 @@
+import logging
 from datetime import UTC
 from datetime import datetime
 from typing import override
@@ -16,7 +17,7 @@ from backend.grpc_service.log import log
 
 ONE_HOUR_SECONDS = 60 * 60 * 60
 
-
+logger = logging.getLogger(__name__)
 class MemoryPricedDogTreatRepository(IPricedDogTreatRepository):
     def __init__(self):
         self._pricing_results: dict[UUID, PricedTrick] = {}
@@ -33,6 +34,7 @@ class MemoryPricedDogTreatRepository(IPricedDogTreatRepository):
             updated_at=current_dt,
             current_status=Status.NEW,
         )
+        logger.info("pricing_results: %s", self._pricing_results)
         return convert_priced_trick_to_pricing_result(self._pricing_results.setdefault(pricing_id, record))
 
     @override

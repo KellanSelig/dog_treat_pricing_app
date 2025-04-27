@@ -1,12 +1,12 @@
 syntax = "proto3";
-package backend.grpc_service.v1;
+package grpc_service.v1;
 
 import "google/protobuf/empty.proto";
 
 service DogTrickService {
   rpc GetDogTreatPrice(GetDogTreatPriceRequest) returns (GetDogTreatPriceResponse);
   rpc PerformDogTrick(PerformDogTrickRequest) returns (stream PerformDogTrickResponse);
-  rpc HeathCheck(google.protobuf.Empty) returns (HealthCheckResponse);
+  rpc HealthCheck(google.protobuf.Empty) returns (HealthCheckResponse);
 }
 
 message GetDogTreatPriceRequest {
@@ -14,7 +14,7 @@ message GetDogTreatPriceRequest {
   float dog_treat_to_belly_rub_ratio = 2;
   repeated DogTrick tricks_to_perform = 3;
   repeated DogBehavior cutes_to_include = 4;
-  string location = 5; // Should be an enum but keeping it simple
+  Location location = 5;
 }
 
 message GetDogTreatPriceResponse {
@@ -99,4 +99,16 @@ enum Status {
   STATUS_UNSPECIFIED = 0;
   STATUS_SUCCESS = 1;
   STATUS_ERROR = 2;
+}
+
+enum Location {
+  LOCATION_UNSPECIFIED = 0;
+  LOCATION_OUTSIDE = 1;
+  LOCATION_LOTS_OF_DOGS = 2;
+  LOCATION_DOG_PARK = 3;
+  LOCATION_SQUIRRELS_PRESENT = 4;
+  LOCATION_HOME = 5;
+  LOCATION_TASTY_TREATS = 6;
+  LOCATION_PET_STORE = 7;
+  LOCATION_INSIDE = 8;
 }

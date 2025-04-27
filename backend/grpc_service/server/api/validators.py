@@ -1,10 +1,10 @@
 from uuid import UUID
 
-from backend.code_gen.grpc_service.v1.service_pb2 import GetDogTreatPriceRequest
-from backend.code_gen.grpc_service.v1.service_pb2 import PerformDogTrickRequest
 from backend.grpc_service.errors import InvalidDogName
 from backend.grpc_service.errors import InvalidPricingID
 from backend.grpc_service.errors import PerformDogTrickRequestExceptionGroup
+from grpc_service.v1.service_pb2 import GetDogTreatPriceRequest
+from grpc_service.v1.service_pb2 import PerformDogTrickRequest
 
 
 def validate_dog_trick_price_request(request: GetDogTreatPriceRequest) -> None:

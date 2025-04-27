@@ -36,9 +36,9 @@ def get_trick_difficulty(tricks: Sequence[DogTrick], repository: IDifficultyRati
     total_difficulty = sum(repository.get_difficulty_ratings(tricks))
     if total_difficulty == 0:
         return FreeBehavior()
-    if total_difficulty < 5:
+    if total_difficulty < 2:
         return EasyBehavior()
-    if total_difficulty < 10:
+    if total_difficulty < 5:
         return MediumBehavior()
     return HardBehavior()
 
@@ -61,14 +61,14 @@ def apply_total_cuteness_modifier(
 
 def apply_location_modifier(base_behavior: PricedBehavior, location: Location) -> PricedBehaviorModifier:
     location_lookup: dict[Location, type[PricedBehaviorModifier]] = {
-        Location.INSIDE_LOCATION: InsideLocationModifier,
-        Location.OUTSIDE_LOCATION: OutsideLocationModifier,
-        Location.LOTS_OF_DOGS_LOCATION: LotsOfDogsLocationModifier,
-        Location.DOG_PARK_LOCATION: DogParkLocationModifier,
-        Location.SQUIRRELS_PRESENT_LOCATION: SquirrelsPresentLocationModifier,
-        Location.HOME_LOCATION: HomeLocationModifier,
-        Location.TASTY_TREATS_LOCATION: TastyTreatsLocationModifier,
-        Location.PET_STORE_LOCATION: PetStoreLocationModifier,
+        Location.INSIDE: InsideLocationModifier,
+        Location.OUTSIDE: OutsideLocationModifier,
+        Location.LOTS_OF_DOGS: LotsOfDogsLocationModifier,
+        Location.DOG_PARK: DogParkLocationModifier,
+        Location.SQUIRRELS_PRESENT: SquirrelsPresentLocationModifier,
+        Location.HOME: HomeLocationModifier,
+        Location.TASTY_TREATS: TastyTreatsLocationModifier,
+        Location.PET_STORE: PetStoreLocationModifier,
     }
     return location_lookup.get(location, UnknownLocationModifier)(base_behavior)
 
@@ -110,7 +110,6 @@ def calculate_price(
         priced_behavior, pricing_request.behaviors_to_perform, cuteness_repository
     )
     subtotal = priced_behavior.get_price()
-    # TODO - Check math
     return Price(
         subtotal.amount_dog_treat * pricing_request.dog_treat_to_belly_rub_ratio,
         subtotal.amount_belly_rub * (1 - pricing_request.dog_treat_to_belly_rub_ratio),

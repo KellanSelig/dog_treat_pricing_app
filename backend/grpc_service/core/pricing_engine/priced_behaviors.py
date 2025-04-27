@@ -9,14 +9,14 @@ class FreeBehavior(PricedBehavior):
 
 class EasyBehavior(PricedBehavior):
     def get_price(self) -> Price:
-        return Price(1, 1)
+        return Price(5, 5)
 
 
 class MediumBehavior(PricedBehavior):
     def get_price(self) -> Price:
-        return Price(2, 2)
+        return Price(10, 10)
 
 
 class HardBehavior(PricedBehavior):
     def get_price(self) -> Price:
-        return Price(3, 3)
+        return Price(20, 20)

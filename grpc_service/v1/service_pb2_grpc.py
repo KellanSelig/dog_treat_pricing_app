@@ -36,17 +36,17 @@ class DogTrickServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetDogTreatPrice = channel.unary_unary(
-                '/backend.grpc_service.v1.DogTrickService/GetDogTreatPrice',
+                '/grpc_service.v1.DogTrickService/GetDogTreatPrice',
                 request_serializer=grpc__service_dot_v1_dot_service__pb2.GetDogTreatPriceRequest.SerializeToString,
                 response_deserializer=grpc__service_dot_v1_dot_service__pb2.GetDogTreatPriceResponse.FromString,
                 _registered_method=True)
         self.PerformDogTrick = channel.unary_stream(
-                '/backend.grpc_service.v1.DogTrickService/PerformDogTrick',
+                '/grpc_service.v1.DogTrickService/PerformDogTrick',
                 request_serializer=grpc__service_dot_v1_dot_service__pb2.PerformDogTrickRequest.SerializeToString,
                 response_deserializer=grpc__service_dot_v1_dot_service__pb2.PerformDogTrickResponse.FromString,
                 _registered_method=True)
-        self.HeathCheck = channel.unary_unary(
-                '/backend.grpc_service.v1.DogTrickService/HeathCheck',
+        self.HealthCheck = channel.unary_unary(
+                '/grpc_service.v1.DogTrickService/HealthCheck',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=grpc__service_dot_v1_dot_service__pb2.HealthCheckResponse.FromString,
                 _registered_method=True)
@@ -67,7 +67,7 @@ class DogTrickServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def HeathCheck(self, request, context):
+    def HealthCheck(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -86,16 +86,16 @@ def add_DogTrickServiceServicer_to_server(servicer, server):
                     request_deserializer=grpc__service_dot_v1_dot_service__pb2.PerformDogTrickRequest.FromString,
                     response_serializer=grpc__service_dot_v1_dot_service__pb2.PerformDogTrickResponse.SerializeToString,
             ),
-            'HeathCheck': grpc.unary_unary_rpc_method_handler(
-                    servicer.HeathCheck,
+            'HealthCheck': grpc.unary_unary_rpc_method_handler(
+                    servicer.HealthCheck,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=grpc__service_dot_v1_dot_service__pb2.HealthCheckResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'backend.grpc_service.v1.DogTrickService', rpc_method_handlers)
+            'grpc_service.v1.DogTrickService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('backend.grpc_service.v1.DogTrickService', rpc_method_handlers)
+    server.add_registered_method_handlers('grpc_service.v1.DogTrickService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -116,7 +116,7 @@ class DogTrickService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/backend.grpc_service.v1.DogTrickService/GetDogTreatPrice',
+            '/grpc_service.v1.DogTrickService/GetDogTreatPrice',
             grpc__service_dot_v1_dot_service__pb2.GetDogTreatPriceRequest.SerializeToString,
             grpc__service_dot_v1_dot_service__pb2.GetDogTreatPriceResponse.FromString,
             options,
@@ -143,7 +143,7 @@ class DogTrickService(object):
         return grpc.experimental.unary_stream(
             request,
             target,
-            '/backend.grpc_service.v1.DogTrickService/PerformDogTrick',
+            '/grpc_service.v1.DogTrickService/PerformDogTrick',
             grpc__service_dot_v1_dot_service__pb2.PerformDogTrickRequest.SerializeToString,
             grpc__service_dot_v1_dot_service__pb2.PerformDogTrickResponse.FromString,
             options,
@@ -157,7 +157,7 @@ class DogTrickService(object):
             _registered_method=True)
 
     @staticmethod
-    def HeathCheck(request,
+    def HealthCheck(request,
             target,
             options=(),
             channel_credentials=None,
@@ -170,7 +170,7 @@ class DogTrickService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/backend.grpc_service.v1.DogTrickService/HeathCheck',
+            '/grpc_service.v1.DogTrickService/HealthCheck',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             grpc__service_dot_v1_dot_service__pb2.HealthCheckResponse.FromString,
             options,

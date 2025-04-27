@@ -10,20 +10,20 @@ from backend.grpc_service.log import log
 class MemoryDifficultyRatingRepository(IDifficultyRatingRepository):
     _difficulty_lookup: ClassVar[dict[DogTrick , float]] = {
         DogTrick.LAY_DOWN: 1,
-        DogTrick.ROLL_OVER: 1,
+        DogTrick.ROLL_OVER: 2,
         DogTrick.SIT: 1,
         DogTrick.SHAKE: 1,
-        DogTrick.HIGH_FIVE: 1,
-        DogTrick.GO_TO_BED: 1,
-        DogTrick.STAY: 1,
-        DogTrick.COME: 1,
-        DogTrick.FETCH: 1,
+        DogTrick.HIGH_FIVE: 2,
+        DogTrick.GO_TO_BED: 2,
+        DogTrick.STAY: 7,
+        DogTrick.COME: 5,
+        DogTrick.FETCH: 3,
         DogTrick.GO_TO_SPOT: 1,
-        DogTrick.BUTTON: 1,
-        DogTrick.LETS_GO: 1,
-        DogTrick.THIS_WAY: 1,
-        DogTrick.LEAVE_IT: 1,
-        DogTrick.DROP_IT: 1,
+        DogTrick.BUTTON: 6,
+        DogTrick.LETS_GO: 2,
+        DogTrick.THIS_WAY: 2,
+        DogTrick.LEAVE_IT: 10,
+        DogTrick.DROP_IT: 15,
     }
 
     @override

@@ -124,6 +124,35 @@ STATUS_SUCCESS: Status.ValueType  # 1
 STATUS_ERROR: Status.ValueType  # 2
 global___Status = Status
 
+class _Location:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LocationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Location.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    LOCATION_UNSPECIFIED: _Location.ValueType  # 0
+    LOCATION_OUTSIDE: _Location.ValueType  # 1
+    LOCATION_LOTS_OF_DOGS: _Location.ValueType  # 2
+    LOCATION_DOG_PARK: _Location.ValueType  # 3
+    LOCATION_SQUIRRELS_PRESENT: _Location.ValueType  # 4
+    LOCATION_HOME: _Location.ValueType  # 5
+    LOCATION_TASTY_TREATS: _Location.ValueType  # 6
+    LOCATION_PET_STORE: _Location.ValueType  # 7
+    LOCATION_INSIDE: _Location.ValueType  # 8
+
+class Location(_Location, metaclass=_LocationEnumTypeWrapper): ...
+
+LOCATION_UNSPECIFIED: Location.ValueType  # 0
+LOCATION_OUTSIDE: Location.ValueType  # 1
+LOCATION_LOTS_OF_DOGS: Location.ValueType  # 2
+LOCATION_DOG_PARK: Location.ValueType  # 3
+LOCATION_SQUIRRELS_PRESENT: Location.ValueType  # 4
+LOCATION_HOME: Location.ValueType  # 5
+LOCATION_TASTY_TREATS: Location.ValueType  # 6
+LOCATION_PET_STORE: Location.ValueType  # 7
+LOCATION_INSIDE: Location.ValueType  # 8
+global___Location = Location
+
 @typing.final
 class GetDogTreatPriceRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -135,8 +164,7 @@ class GetDogTreatPriceRequest(google.protobuf.message.Message):
     LOCATION_FIELD_NUMBER: builtins.int
     dog_name: builtins.str
     dog_treat_to_belly_rub_ratio: builtins.float
-    location: builtins.str
-    """Should be an enum but keeping it simple"""
+    location: global___Location.ValueType
     @property
     def tricks_to_perform(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___DogTrick.ValueType]: ...
     @property
@@ -148,7 +176,7 @@ class GetDogTreatPriceRequest(google.protobuf.message.Message):
         dog_treat_to_belly_rub_ratio: builtins.float = ...,
         tricks_to_perform: collections.abc.Iterable[global___DogTrick.ValueType] | None = ...,
         cutes_to_include: collections.abc.Iterable[global___DogBehavior.ValueType] | None = ...,
-        location: builtins.str = ...,
+        location: global___Location.ValueType = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["cutes_to_include", b"cutes_to_include", "dog_name", b"dog_name", "dog_treat_to_belly_rub_ratio", b"dog_treat_to_belly_rub_ratio", "location", b"location", "tricks_to_perform", b"tricks_to_perform"]) -> None: ...
 
